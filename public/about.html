@@ -1,130 +1,38 @@
-<!--I ADDED COMPLETE CODE FOR LOGIN PAGE -->
-<!-- This is a Semantic HTML Change -->
-
-<!-- This is an SEO Change -->
-
-<!-- This is an A11y Change -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>About - Personal Budget App</title>
+    <title>Our Mission and Features - Personal Budget App</title>
     
-    <meta name="description" content="Learn more about the Personal Budget App">
+    <meta name="description" content="Discover the mission, features, and story behind the Personal Budget App. Learn how we empower users to achieve financial control.">
+    
+    <meta name="keywords" content="personal budget, finance app, money management, savings goals, financial literacy">
     
     <style>
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5; 
-            color: #333;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        
-        nav {
-            background-color: #4d5791;
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: flex-start;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        nav ul li {
-            margin-right: 30px;
-        }
-
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        nav ul li a:hover {
-            color: #e0e0e0;
-        }
-
-        /* Main Content Area */
-        main {
-            flex-grow: 1;
-            padding: 40px 20px; /* More padding for content pages */
-        }
-
-        /* New container for text content */
-        .content-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 900px; /* Wider for better text flow */
-            margin: 0 auto; /* Center the container */
-        }
-        
-        /* Typography styles for the About page content */
-        .content-container h1, .content-container h2 {
-            color: #2c3e50;
-            margin-bottom: 16px;
-        }
-        
-        .content-container h1 {
-           font-size: 32px;
-           border-bottom: 2px solid #f0f2f5;
-           padding-bottom: 10px;
-           margin-bottom: 24px;
-        }
-        
-        .content-container h2 {
-           font-size: 24px;
-           margin-top: 30px;
-        }
-
-        .content-container p {
-            margin-bottom: 16px;
-        }
-        
-        .content-container ul {
-            list-style-position: inside;
-            margin-left: 20px;
-        }
-        
-        .content-container li {
-            margin-bottom: 10px;
-        }
-
-        .content-container a {
-            color: #4d5791;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .content-container a:hover {
-            text-decoration: underline;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        nav { background-color: #4d5791; padding: 15px 0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        nav ul { list-style: none; display: flex; justify-content: flex-start; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        nav ul li { margin-right: 30px; }
+        nav ul li a { color: #ffffff; text-decoration: none; font-weight: bold; font-size: 16px; }
+        nav ul li a:hover { color: #e0e0e0; }
+        main { flex-grow: 1; padding: 40px 20px; }
+        .content-container { background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; margin: 0 auto; }
+        .content-container h1, .content-container h2 { color: #2c3e50; margin-bottom: 16px; }
+        .content-container h1 { font-size: 32px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 24px; }
+        .content-container h2 { font-size: 24px; margin-top: 30px; }
+        .content-container p { margin-bottom: 16px; }
+        .content-container ul { list-style-position: inside; margin-left: 20px; }
+        .content-container li { margin-bottom: 10px; }
+        .content-container a { color: #4d5791; font-weight: bold; text-decoration: none; }
+        .content-container a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
+
+    <a href="#main-content" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to main content</a>
 
     <nav>
         <ul>
@@ -135,16 +43,18 @@
         </ul>
     </nav>
 
-    <main>
-        <section class="content-container">
-            
-            <h1>About Our Personal Budget App</h1>
+    <main id="main-content" class="content-container">
+        
+        <h1>About Our Personal Budget App</h1>
 
+        <article>
             <h2>Our Mission</h2>
             <p>
                 In a world of complex finances, our mission is simple: to provide you with the clearest, most intuitive tools to manage your money. We believe that financial literacy and control should be accessible to everyone. Our app is designed to empower you to track your spending, save effectively, and achieve your financial goals with confidence.
             </p>
+        </article>
 
+        <article>
             <h2>Key Features</h2>
             <p>We've packed our app with powerful features to make budgeting a breeze:</p>
             <ul>
@@ -154,7 +64,9 @@
                 <li><strong>Secure & Private:</strong> We use bank-level security to ensure your data is always safe and confidential.</li>
                 <li><strong>Insightful Reports:</strong> Generate weekly and monthly reports to understand your spending habits and identify opportunities to save.</li>
             </ul>
+        </article>
 
+        <article>
             <h2>Our Story</h2>
             <p>
                 Founded in 2025 for testing of HTML page which should give great insights about Personal Budget Carolina, the Personal Budget App was born out of a personal need for a better way to manage money.
@@ -162,8 +74,8 @@
             <p>
                 Have questions or feedback? We'd love to hear from you! Please <a href="mailto:support@personalbudget.com">contact our support team</a>.
             </p>
+        </article>
 
-        </section>
     </main>
 
 </body>
