@@ -3,129 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Budget</title>
-    <meta name="description" content="A free personal budger app">
-    <meta name="keywords" content="app free budget finance">
+    <title>Personal Budget — Free Personal Budgeting App</title> <!-- This is an SEO Change -->
+    <meta name="description" content="Personal Budget is a free app to track expenses, set category budgets and get alerts so you never overspend."> <!-- This is an SEO Change -->
+    <meta name="keywords" content="personal budget, budgeting app, expense tracker, finance app, free budget"> <!-- This is an SEO Change -->
+    <link rel="canonical" href="https://example.com/index.html"> <!-- This is an SEO Change -->
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="main.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Personal Budget",
+      "url": "https://example.com",
+      "description": "A free personal budgeting app to track expenses, set budgets and receive alerts.",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script> <!-- This is an SEO Change -->
 </head>
 <body>
 
 <a href="#main" class="skip">Skip to content</a>
 
-    <nav>
-    <ul>
-        <li><a href="index.html">Homepage</a></li><!-- This is an A11y Change -->
-        <li><a href="about.html">About</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="https://google.com">Google</a></li>
-    </ul>
+<header>
+    <nav aria-label="Main navigation"> <!-- This is a Semantics Change -->
+        <ul>
+            <li><a href="index.html" aria-current="page">Homepage</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google (external)</a></li> <!-- This is an A11y Change -->
+        </ul>
     </nav>
+</header>
 
-    <div class="hero">
-        <h1>Personal Budget</h1>
-        <h2>A personal-budget management app</h2>
+<div class="hero" role="region" aria-labelledby="hero-title"> <!-- This is an A11y Change -->
+    <h1 id="hero-title">Personal Budget</h1>
+    <h2>A personal-budget management app</h2>
+</div>
+
+<main class="center" id="main" role="main"> <!-- This is a Semantics Change -->
+    <div class="page-area">
+
+        <section aria-labelledby="stay-on-track"> <!-- This is a Semantics Change -->
+            <article>
+                <h2 id="stay-on-track">Stay on track</h2>
+                <p>
+                    Do you know where you are spending your money? If you stop and track it,
+                    you'll be surprised. Proper budget management depends on real data — this
+                    app will help you collect and visualize it.
+                </p>
+            </article>
+        </section>
+
+        <section aria-labelledby="alerts"> <!-- This is a Semantics Change -->
+            <article role="status" aria-live="polite"> <!-- This is an A11y Change -->
+                <h2 id="alerts">Alerts</h2>
+                <p>
+                    If a category reaches its budget limit, you will receive an alert.
+                </p>
+            </article>
+        </section>
+
+        <section aria-labelledby="results"> <!-- This is a Semantics Change -->
+            <article>
+                <h2 id="results">Results</h2>
+                <p>
+                    People who follow a financial plan and budget every expense get out of debt faster
+                    and often report reduced financial stress.
+                </p>
+            </article>
+        </section>
+
+        <section aria-labelledby="free"> <!-- This is a Semantics Change -->
+            <article>
+                <h2 id="free">Free</h2>
+                <p>
+                    This app is free and your data stays private — you control it.
+                </p>
+            </article>
+        </section>
+
+        <section aria-labelledby="chart" class="chart-section"> <!-- This is a Semantics Change -->
+            <article>
+                <h2 id="chart">Spending Chart</h2>
+                <p>
+                    <canvas id="myChart" width="400" height="400" role="img" aria-label="Pie chart showing budget breakdown"></canvas> <!-- This is an A11y Change -->
+                </p>
+                <noscript>
+                    <p class="no-js">Chart is available when JavaScript is enabled.</p>
+                </noscript>
+            </article>
+        </section>
+
     </div>
+</main>
 
-    <main class="center" id="main">
+<footer class="bottom" role="contentinfo"> <!-- This is a Semantics Change -->
+    <div class="center">
+        All rights reserved &copy; Fabio Nolasco
+    </div>
+</footer>
 
-        <div class="page-area">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 
-            <article>
-                <h1>Stay on track</h1>
-                <p>
-                    Do you know where you are spending your money? If you really stop to track it down,
-                    you would get surprised! Proper budget management depends on real data... and this
-                    app will help you with that!
-                </p>
-            </article>
-    
-            <article>
-                <h1>Alerts</h1>
-                <p>
-                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-                </p>
-            </article>
-   <!-- This is an SEO Change -->
+<script>
+    var dataSource = {
+        datasets: [
+            {
+                data: [],
+                backgroundColor: [
+                    '#ffcd56',
+                    '#ff6384',
+                    '#36a2eb',
+                    '#fd6b19'
+                ]
+            }
+        ],
+        labels: []
+    };
 
-    <!-- This is an A11y Change -->  
-            <article>
-                <h1>Results</h1>
-                <p>
-                    People who stick to a financial plan, budgeting every expense, get out of debt faster!
-                    Also, they to live happier lives... since they expend without guilt or fear... 
-                    because they know it is all good and accounted for.
-                </p>
-            </article>
-    
-            <article>
-                <h1>Free</h1>
-                <p>
-                    This app is free!!! And you are the only one holding your data!
-                </p>
-            </article>
-<!-- This is an SEO Change -->
-
-<!-- This is an A11y Change -->
-            <article>
-                <h1>Chart</h1>
-                <p>
-                    <canvas id="myChart" width="400" height="400"></canvas>
-                </p>
-            </article>
-
-        </div>
-
-    </main>
-
-    
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
-
-    <script>
-        var dataSource = {
-                datasets: [
-                    {
-                        data: [],
-                        backgroundColor: [
-                            '#ffcd56',
-                            '#ff6384',
-                            '#36a2eb',
-                            '#fd6b19',
-                        ]
+    function createChart() {
+        var ctxEl = document.getElementById('myChart');
+        if (!ctxEl) return;
+        var ctx = ctxEl.getContext && ctxEl.getContext('2d');
+        if (!ctx) return;
+        if (window.myPieChart && window.myPieChart.destroy) {
+            window.myPieChart.destroy();
+        }
+        window.myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: dataSource,
+            options: {
+                responsive: true,
+                legend: { position: 'bottom' },
+                animation: {
+                    onComplete: function () {
+                        var chartEl = document.getElementById('myChart');
+                        if (chartEl) {
+                            chartEl.setAttribute('aria-label', 'Pie chart showing budget: ' + dataSource.labels.join(', '));
+                        }
                     }
-                ],
-                labels: []
-            };
-
-        function createChart() {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: dataSource
-            });
-        }
-
-        function getBudget() {
-            axios.get('http://142.93.50.124:3000/budget')  //Changed to Droplet IP
-            .then(function (res) {
-                for (var i = 0; i < res.data.myBudget.length; i++) {
-                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
-                    dataSource.labels[i] = res.data.myBudget[i].title;
                 }
-                // Moved createChart() outside the loop
-                createChart(); 
-            });
-        }
+            }
+        });
+    }
 
-        getBudget();
-    </script>
-    <footer class="bottom">
-        <div class="center">
-            All rights reserved &copy; Fabio Nolasco
-        </div>
-    </footer>
+    function getBudget() {
+        axios.get('http://142.93.50.124:3000/budget')
+        .then(function (res) {
+            if (!res || !res.data || !Array.isArray(res.data.myBudget)) return;
+            for (var i = 0; i < res.data.myBudget.length; i++) {
+                dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
+                dataSource.labels[i] = res.data.myBudget[i].title;
+            }
+            createChart();
+        })
+        .catch(function (err) {
+            console.error('Budget load error', err);
+            var alertsRegion = document.querySelector('[aria-live="polite"]');
+            if (alertsRegion) {
+                alertsRegion.textContent = 'Could not load budget data at this time.';
+            }
+        });
+    }
 
+    getBudget();
+</script>
 </body>
 </html>
