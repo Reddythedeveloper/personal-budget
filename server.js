@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 
 app.get('/budget', (req, res) => {
-    fs.readFile(path.join(__dirname, 'budget.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join('budget.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Unable to load budget data' });
         }
