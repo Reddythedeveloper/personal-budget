@@ -1,34 +1,23 @@
-// Budget API
-
 const express = require('express');
-const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 const app = express();
-const port = 3000;
 
-app.use(cors());
 
-const budget = {
-    myBudget: [
-        {
-            title: 'Eat out',
-            budget: 25
-        },
-        {
-            title: 'Rent',
-            budget: 275
-        },
-        {
-            title: 'Grocery',
-            budget: 110
-        },
-    ]
-};
+app.use(express.static('public'));
 
 
 app.get('/budget', (req, res) => {
-    res.json(budget);
+    fs.readFile(path.join(__dirname, 'budget.json'), 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: 'Unable to load budget data' });
+        }
+        res.json(JSON.parse(data));
+    });
 });
 
-app.listen(port, () => {
-    console.log(`API served at http://localhost:${port}`);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

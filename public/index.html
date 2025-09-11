@@ -14,7 +14,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Personal Budget",
-      "url": "https://example.com",
+      "url": "https://personal-budget.com",
       "description": "A free personal budgeting app to track expenses, set budgets and receive alerts.",
       "applicationCategory": "FinanceApplication"
     }
@@ -86,11 +86,8 @@
             <article>
                 <h2 id="chart">Spending Chart</h2>
                 <p>
-                    <canvas id="myChart" width="400" height="400" role="img" aria-label="Pie chart showing budget breakdown"></canvas> <!-- This is an A11y Change -->
+                    <canvas id="myChart" width="400" height="400"></canvas> <!-- This is an A11y Change -->
                 </p>
-                <noscript>
-                    <p class="no-js">Chart is available when JavaScript is enabled.</p>
-                </noscript>
             </article>
         </section>
 
@@ -103,67 +100,56 @@
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js" integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
     var dataSource = {
         datasets: [
             {
                 data: [],
                 backgroundColor: [
-                    '#ffcd56',
-                    '#ff6384',
-                    '#36a2eb',
-                    '#fd6b19'
-                ]
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)',
+                    'rgb(201, 203, 207)'
+                ],
             }
         ],
         labels: []
     };
 
+    var myPieChart;
+
     function createChart() {
-        var ctxEl = document.getElementById('myChart');
-        if (!ctxEl) return;
-        var ctx = ctxEl.getContext && ctxEl.getContext('2d');
-        if (!ctx) return;
-        if (window.myPieChart && window.myPieChart.destroy) {
-            window.myPieChart.destroy();
-        }
-        window.myPieChart = new Chart(ctx, {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        myPieChart = new Chart(ctx, {
             type: 'pie',
-            data: dataSource,
-            options: {
-                responsive: true,
-                legend: { position: 'bottom' },
-                animation: {
-                    onComplete: function () {
-                        var chartEl = document.getElementById('myChart');
-                        if (chartEl) {
-                            chartEl.setAttribute('aria-label', 'Pie chart showing budget: ' + dataSource.labels.join(', '));
-                        }
-                    }
-                }
-            }
+            data: dataSource
         });
     }
 
+    function updateChart(budgetData) {
+        dataSource.datasets[0].data = [];
+        dataSource.labels = [];
+        for (var i = 0; i < budgetData.length; i++) {
+            dataSource.datasets[0].data.push(budgetData[i].budget);
+            dataSource.labels.push(budgetData[i].title);
+        }
+        myPieChart.data = dataSource;
+        myPieChart.update();
+    }
+
     function getBudget() {
-        axios.get('http://142.93.50.124:3000/budget')
-        .then(function (res) {
-            if (!res || !res.data || !Array.isArray(res.data.myBudget)) return;
-            for (var i = 0; i < res.data.myBudget.length; i++) {
-                dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
-                dataSource.labels[i] = res.data.myBudget[i].title;
-            }
-            createChart();
+        axios.get('/budget')
+        .then(function (res){
+            if (!myPieChart) createChart();
+            updateChart(res.data.myBudget);
         })
         .catch(function (err) {
-            console.error('Budget load error', err);
-            var alertsRegion = document.querySelector('[aria-live="polite"]');
-            if (alertsRegion) {
-                alertsRegion.textContent = 'Could not load budget data at this time.';
-            }
+            console.error('Could not load budget data:', err);
         });
     }
 
