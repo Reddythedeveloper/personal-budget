@@ -143,7 +143,7 @@
     }
 
     function getBudget() {
-        axios.get('http://localhost:3000/budget')
+        axios.get('/budget')
         .then(function (res){
             if (!myPieChart) createChart();
             updateChart(res.data.myBudget);
