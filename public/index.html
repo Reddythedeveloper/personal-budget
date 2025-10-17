@@ -3,47 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Budget — Free Personal Budgeting App</title> <!-- This is an SEO Change -->
-    <meta name="description" content="Personal Budget is a free app to track expenses, set category budgets and get alerts so you never overspend."> <!-- This is an SEO Change -->
-    <meta name="keywords" content="personal budget, budgeting app, expense tracker, finance app, free budget"> <!-- This is an SEO Change -->
-    <link rel="canonical" href="https://example.com/index.html"> <!-- This is an SEO Change -->
+    <title>Personal Budget — Free Personal Budgeting App</title>
+    <meta name="description" content="Personal Budget is a free app to track expenses, set category budgets and get alerts so you never overspend.">
+    <meta name="keywords" content="personal budget, budgeting app, expense tracker, finance app, free budget">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="main.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Personal Budget",
-      "url": "https://personal-budget.com",
-      "description": "A free personal budgeting app to track expenses, set budgets and receive alerts.",
-      "applicationCategory": "FinanceApplication"
-    }
-    </script> <!-- This is an SEO Change -->
 </head>
 <body>
 
 <a href="#main" class="skip">Skip to content</a>
 
 <header>
-    <nav aria-label="Main navigation"> <!-- This is a Semantics Change -->
+    <nav aria-label="Main navigation">
         <ul>
             <li><a href="index.html" aria-current="page">Homepage</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="login.html">Login</a></li>
-            <li><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google (external)</a></li> <!-- This is an A11y Change -->
+            <li><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google (external)</a></li>
         </ul>
     </nav>
 </header>
 
-<div class="hero" role="region" aria-labelledby="hero-title"> <!-- This is an A11y Change -->
+<div class="hero" role="region" aria-labelledby="hero-title">
     <h1 id="hero-title">Personal Budget</h1>
     <h2>A personal-budget management app</h2>
 </div>
 
-<main class="center" id="main" role="main"> <!-- This is a Semantics Change -->
+<main class="center" id="main" role="main">
     <div class="page-area">
-
-        <section aria-labelledby="stay-on-track"> <!-- This is a Semantics Change -->
+        <section aria-labelledby="stay-on-track">
             <article>
                 <h2 id="stay-on-track">Stay on track</h2>
                 <p>
@@ -53,17 +41,15 @@
                 </p>
             </article>
         </section>
-
-        <section aria-labelledby="alerts"> <!-- This is a Semantics Change -->
-            <article role="status" aria-live="polite"> <!-- This is an A11y Change -->
+        <section aria-labelledby="alerts">
+            <article role="status" aria-live="polite">
                 <h2 id="alerts">Alerts</h2>
                 <p>
                     If a category reaches its budget limit, you will receive an alert.
                 </p>
             </article>
         </section>
-
-        <section aria-labelledby="results"> <!-- This is a Semantics Change -->
+        <section aria-labelledby="results">
             <article>
                 <h2 id="results">Results</h2>
                 <p>
@@ -72,8 +58,7 @@
                 </p>
             </article>
         </section>
-
-        <section aria-labelledby="free"> <!-- This is a Semantics Change -->
+        <section aria-labelledby="free">
             <article>
                 <h2 id="free">Free</h2>
                 <p>
@@ -82,77 +67,97 @@
             </article>
         </section>
 
-        <section aria-labelledby="chart" class="chart-section"> <!-- This is a Semantics Change -->
+        <section aria-labelledby="chartjs-title" class="chart-section">
             <article>
-                <h2 id="chart">Spending Chart</h2>
-                <p>
-                    <canvas id="myChart" width="400" height="400"></canvas> <!-- This is an A11y Change -->
+                <h2 id="chartjs-title">Spending (Chart.js)</h2>
+                <p style="text-align: center;">
+                    <canvas id="myChart" width="400" height="400" role="img" aria-label="Pie chart showing budget distribution using Chart.js"></canvas>
                 </p>
             </article>
         </section>
 
-    </div>
+        <section aria-labelledby="d3js-title" class="chart-section">
+            <article>
+                <h2 id="d3js-title">Spending (D3.js)</h2>
+                <div id="d3-chart-container" style="text-align: center;"></div> </article>
+        </section>
+
+        </div>
 </main>
 
-<footer class="bottom" role="contentinfo"> <!-- This is a Semantics Change -->
+<footer class="bottom" role="contentinfo">
     <div class="center">
         All rights reserved &copy; Fabio Nolasco
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js" integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
 <script>
-    var dataSource = {
-        datasets: [
-            {
-                data: [],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(153, 102, 255)',
-                    'rgb(255, 159, 64)',
-                    'rgb(201, 203, 207)'
-                ],
-            }
-        ],
-        labels: []
-    };
+    // --- CHART.JS PIE CHART ---
+    function createChartJS(data) {
+        const values = data.map(item => item.relatedValue);
+        const labels = data.map(item => item.title);
+        const colors = data.map(item => item.color);
 
-    var myPieChart;
+        const dataSource = {
+            datasets: [{ data: values, backgroundColor: colors }],
+            labels: labels
+        };
 
-    function createChart() {
-        var ctx = document.getElementById("myChart").getContext("2d");
-        myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: dataSource
-        });
+        const ctx = document.getElementById("myChart").getContext("2d");
+        new Chart(ctx, { type: 'pie', data: dataSource });
     }
 
-    function updateChart(budgetData) {
-        dataSource.datasets[0].data = [];
-        dataSource.labels = [];
-        for (var i = 0; i < budgetData.length; i++) {
-            dataSource.datasets[0].data.push(budgetData[i].budget);
-            dataSource.labels.push(budgetData[i].title);
-        }
-        myPieChart.data = dataSource;
-        myPieChart.update();
+    // --- D3.JS PIE CHART ---
+    function createD3Chart(data) {
+        const width = 450, height = 450, margin = 40;
+        const radius = Math.min(width, height) / 2 - margin;
+
+        const svg = d3.select("#d3-chart-container")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("role", "img")
+            .attr("aria-label", "Pie chart created with D3.js")
+            .append("g")
+            .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+        const color = d3.scaleOrdinal()
+            .domain(data.map(d => d.title))
+            .range(data.map(d => d.color));
+
+        const pie = d3.pie().value(d => d.relatedValue);
+        const data_ready = pie(data);
+
+        const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+        svg.selectAll('slices')
+            .data(data_ready)
+            .enter()
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', d => color(d.data.title))
+            .attr("stroke", "white")
+            .style("stroke-width", "2px");
     }
 
+    // --- DATA FETCHING (for both charts) ---
     function getBudget() {
-        axios.get('/budget')
-        .then(function (res){
-            if (!myPieChart) createChart();
-            updateChart(res.data.myBudget);
-        })
-        .catch(function (err) {
-            console.error('Could not load budget data:', err);
-        });
+        axios.get('http://localhost:3000/budget')
+            .then(function (res) {
+                // Use the same data to create both charts
+                createChartJS(res.data);
+                createD3Chart(res.data);
+            })
+            .catch(function (err) {
+                console.error('Could not load budget data:', err);
+            });
     }
 
+    // Run the main function when the page loads
     getBudget();
 </script>
 </body>
